@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/chatappImage.png";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -83,7 +83,7 @@ const Register = () => {
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="brand">
                         <img src={Logo} alt="Logo" />
-                        <h1>Snappy</h1>
+                        <h1>ChatAPP</h1>
                     </div>
                     <input type="text" placeholder='Username' name='username' onChange={(e) => handleChange(e)} />
                     <input type="email" placeholder='Email' name='email' onChange={(e) => handleChange(e)} />
@@ -127,21 +127,21 @@ const FormContainer = styled.div`
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        background-color: #00000076;
+        background-color: #2f6c98aa;
         border-radius: 2rem;
         padding: 3rem 5rem;
 
         input{
             background-color: transparent;
             padding: 1rem;
-            border: 0.1rem solid #4e0eff;
+            border: 0.1rem solid #aeaeae;
             border-radius: 0.4rem;
             color: white;
             width: 100%;
             font-size: 1rem;
 
             &:focus{
-                border: 0.1rem solid #997af0;
+                border: 0.1rem solid #ffffff;
                 outline: none;
             }
         }
@@ -165,7 +165,7 @@ const FormContainer = styled.div`
             color: white;
             text-transform: uppercase;
             a{
-                color: #4e0eff;
+                color: #c7b3ff;
                 text-decoration: none;
                 font-weight: bold;
             }

@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import { allUsersRoute } from '../utils/APIRoutes';
+import { allUsersRoute, host } from '../utils/APIRoutes';
 import Contact from '../components/Contact';
 import Welcome from '../components/Welcome';
 import ChatContainer from '../components/ChatContainer';
+import { io } from "socket.io-client";
+
 
 const Chat = () => {
 
-
+    const socket = useRef();
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -24,6 +26,13 @@ const Chat = () => {
             setCurrentUser(JSON.parse(localStorage.getItem('chat-app-user')));
         }
     }, [])
+
+    useEffect(() => {
+        if (currentUser) {
+            socket.current = io(host);
+            socket.current.emit("add-user", currentUser._id);
+        }
+    }, [currentUser])
 
 
     useEffect(() => {
@@ -55,7 +64,7 @@ const Chat = () => {
                 {
                     currentChat === undefined
                         ? (<Welcome currentUser={currentUser} />)
-                        : (<ChatContainer currentChat={currentChat} />)
+                        : (<ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />)
                 }
 
             </div>
@@ -74,17 +83,25 @@ const Container = styled.div`
     justify-content: center;
     gap: 1rem;
     align-items: center;
-    background-color: #131324;
+    background-color: #F1FAEE;
+    
 
     .container{
         height: 85vh;
         width: 85vw;
-        background-color: #00000076;
+        background-color: #14213D;
         display: grid;
         grid-template-columns: 25% 75%;
 
         @media screen and (min-width: 720px) and (max-width: 1080px){
                 grid-template-columns: 35% 65%;
+        }
+
+
+        @media screen and (max-width: 380px){
+              display: flex;
+              flex-direction: column;
+              height: 100vh;
         }
     }
 `;

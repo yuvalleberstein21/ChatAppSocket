@@ -10,7 +10,6 @@ const Contact = ({ contacts, currentUser, changeChat }) => {
     const [currentSelected, setCurrentSelected] = useState(undefined);
 
     useEffect(() => {
-        console.log(contacts)
         if (currentUser) {
             setCurrentUserImage(currentUser.avatarImage);
             setCurrentUserName(currentUser.username);
@@ -30,7 +29,7 @@ const Contact = ({ contacts, currentUser, changeChat }) => {
                     <Container>
                         <div className="brand">
                             <img src={Logo} alt="Logo" />
-                            <h3>Snappy</h3>
+                            <h3>ChatAPP</h3>
                         </div>
                         <div className="contacts">
                             {
@@ -70,7 +69,14 @@ const Container = styled.div`
     display: grid;
     grid-template-rows: 10% 75% 15%;
     overflow: hidden;
-    background-color: #080420;
+    background-color: #264653;
+
+    @media screen and (max-width: 380px){
+              display: flex;
+              flex-direction: column;
+
+              margin: 1rem 0;
+        }
 
     .brand{
         display: flex;
@@ -92,6 +98,7 @@ const Container = styled.div`
         overflow: auto;
         gap: 0.8rem;
 
+        
         &::-webkit-scrollbar {
             width: 0.2rem;
           &-thumb{
@@ -112,6 +119,7 @@ const Container = styled.div`
             align-items: center;
             display: flex;
             transition: 0.5s ease-in-out;
+            
             .avatar{
                 img{
                     height: 3rem;
@@ -125,7 +133,7 @@ const Container = styled.div`
             }
         }
         .selected{
-            background-color: #9186f3;
+            background-color: #0d0d30;
         }
     }
     .current-user{
